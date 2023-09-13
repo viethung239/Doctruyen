@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding ="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+        <ImageView
+            android:id="@+id/imgComic"
+            android:src="@drawable/linhkhu"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/txtNameChap"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#85332B2B"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="Chap"
+            android:textSize="12dp"
+            />
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/nameComic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Name"
+        android:textSize="14dp"
+        android:textColor="#000"/>
+
+</LinearLayout>
