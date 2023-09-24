@@ -29,6 +29,20 @@ public class ComicAdapter extends ArrayAdapter<Comic> {
         this.arr = new ArrayList<>(objects);
     }
 
+    public void sortComic(String s){
+        s = s.toUpperCase();
+        int k =0;
+        for(int i = 0 ; i < arr.size();i++){
+            Comic c = arr.get(i);
+            String name  = c.getNameComic().toUpperCase();
+            if(name.indexOf(s)>=0){
+                arr.set(i,arr.get(k));
+                arr.set(k,c);
+                k++;
+            }
+        }
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getView(int position, @Nullable View convertView,  ViewGroup parent) {

@@ -13,6 +13,7 @@
         android:background="#0e9a56"
         android:gravity="center">
         <EditText
+            android:id="@+id/SearchComic"
             android:background="@drawable/bg_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

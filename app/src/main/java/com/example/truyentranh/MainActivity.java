@@ -3,6 +3,9 @@ package com.example.truyentranh;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import com.example.truyentranh.adapter.ComicAdapter;
@@ -14,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 GridView gdvListComic;
 ComicAdapter adapter;
 ArrayList<Comic> ComicArrList;
+EditText SearchComic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +46,29 @@ ArrayList<Comic> ComicArrList;
     }
     private void anhXa(){
         gdvListComic = findViewById(R.id.gdvListComic);
+        SearchComic = findViewById(R.id.SearchComic);
     }
     private void setUp(){
         gdvListComic.setAdapter(adapter);
     }
     private void setClick(){
+        SearchComic.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = SearchComic .getText().toString();
+                adapter.sortComic(s);
+
+            }
+        });
     }
 }
