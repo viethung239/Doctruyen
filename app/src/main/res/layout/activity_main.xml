@@ -32,7 +32,7 @@
     <GridView
         android:id="@+id/gdvListComic"
         android:layout_width="match_parent"
-        android:layout_height="533dp"
+        android:layout_height="wrap_content"
         android:numColumns="3"></GridView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
