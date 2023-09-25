@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
+
 import android.widget.EditText;
 import android.widget.GridView;
 
 import com.example.truyentranh.adapter.ComicAdapter;
 import com.example.truyentranh.object.Comic;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ EditText SearchComic;
         anhXa();
         setUp();
         setClick();
-        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+
 
     }
     private void init(){
