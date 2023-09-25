@@ -28,7 +28,7 @@ public class ComicAdapter extends ArrayAdapter<Comic> {
         this.ct = context;
         this.arr = new ArrayList<>(objects);
     }
-
+    /* search name comic */
     public void sortComic(String s){
         s = s.toUpperCase();
         int k =0;

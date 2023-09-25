@@ -28,9 +28,23 @@
             android:textColor="#fff"/>
 
     </RelativeLayout>
+
     <GridView
         android:id="@+id/gdvListComic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="533dp"
         android:numColumns="3"></GridView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="#0e9a56"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/menu_bottom"
+        app:labelVisibilityMode="labeled"/>
+
+
 </LinearLayout>
