@@ -1,9 +1,23 @@
 package com.example.truyentranh.object;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Comic {
     private String nameComic,nameChap,linkImg;
-
+    /*{
+        "nameComic":"",
+        nameChap:"",
+        linkImg:""
+       }
+    */
     public Comic(){
+
+    }
+    public Comic(JSONObject o) throws JSONException {
+        nameComic = o.getString("nameComic");
+        nameChap = o.getString("nameChap");
+        linkImg = o.getString("linkImg");
 
     }
     public Comic(String nameComic, String nameChap, String linkImg) {

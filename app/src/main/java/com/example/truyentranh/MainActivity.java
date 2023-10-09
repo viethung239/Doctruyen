@@ -8,14 +8,21 @@ import android.text.TextWatcher;
 
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import com.example.truyentranh.Api.ApiGetComic;
+import com.example.truyentranh.Interfaces.GetComic;
 import com.example.truyentranh.adapter.ComicAdapter;
 import com.example.truyentranh.object.Comic;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GetComic {
 GridView gdvListComic;
 ComicAdapter adapter;
 ArrayList<Comic> ComicArrList;
@@ -28,23 +35,12 @@ EditText SearchComic;
         anhXa();
         setUp();
         setClick();
-
+        new ApiGetComic(this).execute();
 
     }
     private void init(){
         ComicArrList = new ArrayList<>();
-        ComicArrList.add(new Comic("Đại Phản Diện","Chương 78","https://nettruyenco.vn/public/images/comics/dai-phan-dien.jpg"));
-        ComicArrList.add(new Comic("Bất Lộ Thanh Sắc","Chap 70","https://nettruyenco.vn/public/images/comics/bat-lo-thanh-sac.jpg"));
-        ComicArrList.add(new Comic("Linh Khư","Chapter 76","https://nettruyenco.vn/public/images/comics/linh-khu.jpg"));
-        ComicArrList.add(new Comic("Long Hưởng Thiên Hạ","Chương 5","https://nettruyenco.vn/public/images/comics/long-huong-thien-ha.jpg"));
-        ComicArrList.add(new Comic("Đại Phản Diện","Chương 78","https://nettruyenco.vn/public/images/comics/dai-phan-dien.jpg"));
-        ComicArrList.add(new Comic("Bất Lộ Thanh Sắc","Chap 70","https://nettruyenco.vn/public/images/comics/bat-lo-thanh-sac.jpg"));
-        ComicArrList.add(new Comic("Linh Khư","Chapter 76","https://nettruyenco.vn/public/images/comics/linh-khu.jpg"));
-        ComicArrList.add(new Comic("Long Hưởng Thiên Hạ","Chương 5","https://nettruyenco.vn/public/images/comics/long-huong-thien-ha.jpg"));
-        ComicArrList.add(new Comic("Đại Phản Diện","Chương 78","https://nettruyenco.vn/public/images/comics/dai-phan-dien.jpg"));
-        ComicArrList.add(new Comic("Bất Lộ Thanh Sắc","Chap 70","https://nettruyenco.vn/public/images/comics/bat-lo-thanh-sac.jpg"));
-        ComicArrList.add(new Comic("Linh Khư","Chapter 76","https://nettruyenco.vn/public/images/comics/linh-khu.jpg"));
-        ComicArrList.add(new Comic("Long Hưởng Thiên Hạ","Chương 5","https://nettruyenco.vn/public/images/comics/long-huong-thien-ha.jpg"));
+
 
         adapter = new ComicAdapter(this,0,ComicArrList);
     }
@@ -74,5 +70,31 @@ EditText SearchComic;
 
             }
         });
+    }
+
+    @Override
+    public void start() {
+        Toast.makeText(this,"Đang Lấy Về",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void end(String data) {
+        try {
+            ComicArrList.clear();
+            JSONArray arr = new JSONArray(data);
+            for (int i=0;i<arr.length();i++){
+                JSONObject o =arr.getJSONObject(i);
+                ComicArrList.add(new Comic(o));
+            }
+            adapter = new ComicAdapter(this,0,ComicArrList);
+            gdvListComic.setAdapter(adapter);
+        }catch (JSONException e){
+
+        }
+    }
+
+    @Override
+    public void error() {
+        Toast.makeText(this,"Không Lấy Về Được",Toast.LENGTH_SHORT).show();
     }
 }

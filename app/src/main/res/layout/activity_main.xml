@@ -12,20 +12,21 @@
         android:layout_height="60dp"
         android:background="#0e9a56"
         android:gravity="center">
+
         <EditText
             android:id="@+id/SearchComic"
-            android:background="@drawable/bg_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="80dp"
-            android:hint="Tên truyện cần tìm"
-            android:textColorHint="#D2E6EFE2"
-            android:textSize="20sp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_edit"
             android:gravity="center"
-            android:textColor="#fff"/>
+            android:hint="Tên truyện cần tìm"
+            android:textColor="#fff"
+            android:textColorHint="#D2E6EFE2"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
@@ -34,17 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="3"></GridView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:backgroundTint="#0e9a56"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/menu_bottom"
-        app:labelVisibilityMode="labeled"/>
 
 
 </LinearLayout>
