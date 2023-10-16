@@ -37,7 +37,7 @@
         <View
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/baseline_email_24" />
+            android:background="@drawable/email" />
 
         <EditText
             android:id="@+id/edt_email_reg"
@@ -47,10 +47,10 @@
             android:background="@android:color/transparent"
             android:hint="Email Address"
             android:maxLines="1"
-            android:paddingVertical="6dp"
+            android:paddingVertical="8dp"
             android:singleLine="true"
             android:textColor="#949494"
-            android:textSize="16sp">
+            android:textSize="25sp">
 
         </EditText>
     </LinearLayout>
@@ -68,7 +68,7 @@
         <View
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/baseline_lock_24" />
+            android:background="@drawable/padlock" />
 
         <EditText
             android:id="@+id/edt_password_reg"
@@ -78,11 +78,10 @@
             android:background="@android:color/transparent"
             android:hint="Password"
             android:maxLines="1"
-            android:paddingVertical="6dp"
-            android:password="true"
+            android:paddingVertical="8dp"
             android:singleLine="true"
             android:textColor="#949494"
-            android:textSize="16sp">
+            android:textSize="25sp">
 
         </EditText>
     </LinearLayout>
@@ -100,7 +99,7 @@
         <View
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/baseline_phone_iphone_24" />
+            android:background="@drawable/telephone" />
 
         <EditText
             android:id="@+id/edt_phone"
@@ -110,11 +109,11 @@
             android:background="@android:color/transparent"
             android:hint="Phone"
             android:maxLines="1"
-            android:paddingVertical="6dp"
+            android:paddingVertical="8dp"
             android:password="true"
             android:singleLine="true"
             android:textColor="#949494"
-            android:textSize="16sp" />
+            android:textSize="25sp" />
     </LinearLayout>
 
 
