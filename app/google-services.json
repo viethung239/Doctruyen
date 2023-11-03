@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "262055794157",
+    "firebase_url": "https://app-doctruyen-f151b-default-rtdb.firebaseio.com",
+    "project_id": "app-doctruyen-f151b",
+    "storage_bucket": "app-doctruyen-f151b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262055794157:android:3814a5e1c1a27ef3a943e4",
+        "android_client_info": {
+          "package_name": "com.example.truyentranh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDrwcR6yRxfo5IE-7BU1pVbKiBYj8rMz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

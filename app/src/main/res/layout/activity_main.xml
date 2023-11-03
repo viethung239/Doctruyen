@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/back01"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#0e9a56"
-        android:gravity="center">
+    <ImageView
+       android:id="@+id/iconApp"
+        android:src="@drawable/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iconApp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Chào mừng bạn đến TruyenTranh"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
 
-        <EditText
-            android:id="@+id/SearchComic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/bg_edit"
-            android:gravity="center"
-            android:hint="Tên truyện cần tìm"
-            android:textColor="#fff"
-            android:textColorHint="#D2E6EFE2"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <GridView
-        android:id="@+id/gdvListComic"
+    <Button
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3"></GridView>
+        android:layout_above="@+id/skipBtn"
+        android:layout_marginBottom="10dp"
+        android:text="Đăng Nhập"
+        android:textColor="@color/white"
 
+        android:backgroundTint="#0FD817"/>
+    <Button
+        android:id="@+id/skipBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Tiếp tục mà không cần đăng nhập"
+        android:backgroundTint="#0FD817"
+        />
 
-</LinearLayout>
+</RelativeLayout>
