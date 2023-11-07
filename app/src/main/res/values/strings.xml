@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">truyentranh</string>
-    <string name="action_home">Trang chủ</string>
-    <string name="action_favorite">Yêu Thích</string>
-    <string name="action_history">Lịch Sử</string>
-    <string name="action_page">Trang</string>
+    <string name="app_name">Truyện Tranh</string>
+    <string name="new_user_signup">Người dùng mới? <b> Đăng kí ngay</b></string>
 </resources>

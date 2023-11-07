@@ -33,7 +33,7 @@
         android:layout_marginBottom="10dp"
         android:text="Đăng Nhập"
         android:textColor="@color/white"
-
+        
         android:backgroundTint="#0FD817"/>
     <Button
         android:id="@+id/skipBtn"
