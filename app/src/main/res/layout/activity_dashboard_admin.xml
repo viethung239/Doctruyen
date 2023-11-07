@@ -50,4 +50,65 @@
 
 
     </RelativeLayout>
+    
+    <!--Tìm kiếm-->
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarapp"
+        android:hint="Tìm kiếm"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:padding="12dp"
+        android:background="@color/green"
+        android:textColorHint="@color/gray_01"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoriesRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/row_catrgory"
+        android:layout_below="@id/searchEt"
+        android:layout_margin="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_above="@id/bottomLl"/>
+
+    <LinearLayout
+        android:id="@+id/bottomLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <!-- Thêm danh mục sản phẩm -->
+        <Button
+            android:id="@+id/addCategoryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ Thêm danh mục sản phẩm"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/green"
+            android:minHeight="50dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <!-- Thêm file -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addPdfFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_picture_as_pdf_24"
+            app:backgroundTint="@color/green"
+            app:fabCustomSize="50dp"
+            app:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </LinearLayout>
 </RelativeLayout>
