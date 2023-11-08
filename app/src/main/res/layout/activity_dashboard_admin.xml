@@ -64,7 +64,7 @@
         android:drawableStart="@drawable/baseline_search_24"
         android:padding="12dp"
         android:background="@color/green"
-        android:textColorHint="@color/gray_01"/>
+        android:textColorHint="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoriesRv"

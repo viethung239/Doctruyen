@@ -91,7 +91,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
     private void deleteCategory(ModelCategory model, HolderCategory holder) {
         //Xóa theo id của danh mục
         String id =model.getId();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Danh muc");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categorys");
         ref.child(id)
                 .removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

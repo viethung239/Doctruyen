@@ -81,13 +81,22 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardAdminActivity.this, CategoryActivity.class));
             }
         });
+
+        //Sự kiến nhấn nút thêm truyện file pdf
+        binding.addPdfFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardAdminActivity.this, PdfAddActivity.class));
+            }
+        });
+
     }
 
     private void loadCategories() {
         //Khởi tạo mảng
         categoryArrayList = new ArrayList<>();
         // lấy tất cả danh mục từ firebase
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Danh mục");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categorys");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,6 +110,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
                     categoryArrayList.add(model);
                 }
 
+                adapterCategory = new AdapterCategory(DashboardAdminActivity.this, categoryArrayList);
                 binding.categoriesRv.setAdapter(adapterCategory);
             }
 

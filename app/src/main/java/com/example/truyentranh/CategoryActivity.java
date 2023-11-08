@@ -79,11 +79,11 @@ public class CategoryActivity extends AppCompatActivity {
         //Thêm thông tin vào Firebase
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", ""+timestamp);
-        hashMap.put("categpry", ""+category);
+        hashMap.put("category", ""+category);
         hashMap.put("timestamp", timestamp);
         hashMap.put("uid", ""+firebaseAuth.getUid());
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Danh mục");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categorys");
         ref.child(""+timestamp)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
