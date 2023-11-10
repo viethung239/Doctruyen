@@ -50,6 +50,10 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-storage:20.3.0");
 
+    //github
+    implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
+
+
     testImplementation("junit:junit:4.13.2");
     androidTestImplementation("androidx.test.ext:junit:1.1.5");
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1");

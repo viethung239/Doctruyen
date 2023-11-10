@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.model;
 
 public class ModelCategory {
     //make sure to use same spellings for model variables as in firebase

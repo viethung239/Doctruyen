@@ -1,8 +1,10 @@
-package com.example.truyentranh;
+package com.example.truyentranh.filters;
 
 import android.widget.Filter;
 
-import java.io.File;
+import com.example.truyentranh.adapters.AdapterCategory;
+import com.example.truyentranh.model.ModelCategory;
+
 import java.util.ArrayList;
 
 public class FilterCategory  extends Filter {

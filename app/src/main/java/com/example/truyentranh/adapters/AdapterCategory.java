@@ -1,8 +1,9 @@
-package com.example.truyentranh;
+package com.example.truyentranh.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.truyentranh.ComicListAdminActivity;
+import com.example.truyentranh.filters.FilterCategory;
+import com.example.truyentranh.model.ModelCategory;
 import com.example.truyentranh.databinding.RowCatrgoryBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
 
     //view binding
     private RowCatrgoryBinding binding;
-    private  FilterCategory filter;
+    private FilterCategory filter;
 
     public AdapterCategory(Context context, ArrayList<ModelCategory> categoryArrayList) {
         this.context = context;
@@ -86,6 +87,16 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
             }
         });
 
+        // sự kiện nhấn nút,
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ComicListAdminActivity.class);
+                intent.putExtra("categoryID", id);
+                intent.putExtra("categoryTitle", category);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void deleteCategory(ModelCategory model, HolderCategory holder) {

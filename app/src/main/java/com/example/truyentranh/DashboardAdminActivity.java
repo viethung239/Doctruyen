@@ -9,7 +9,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.example.truyentranh.adapters.AdapterCategory;
 import com.example.truyentranh.databinding.ActivityDashboardAdminBinding;
+import com.example.truyentranh.model.ModelCategory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
