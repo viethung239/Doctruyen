@@ -20,14 +20,10 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:padding="5dp"
-            android:src="@drawable/baseline_keyboard_backspace_24"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:src="@drawable/baseline_keyboard_backspace_24"/>
 
 
         <!--Icon:Image-->
@@ -55,14 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:padding="5dp"
-            android:src="@drawable/baseline_upload_24"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            android:src="@drawable/baseline_upload_24"/>
 
 
     </RelativeLayout>
@@ -88,9 +80,8 @@
             android:inputType="textPersonName|textCapWords"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/gray_01"
             android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:textColorHint="@color/gray_01"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -116,10 +107,9 @@
             android:hint="Mô tả truyện"
             android:inputType="textMultiLine|textCapSentences"
             android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray_01"
             android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_01"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
