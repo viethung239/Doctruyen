@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.truyentranh.ComicDetailActivity;
 import com.example.truyentranh.ComicEditActivity;
 import com.example.truyentranh.MyApplication;
 import com.example.truyentranh.databinding.RowComicAdminBinding;
@@ -80,6 +81,8 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
     private void moreOptionsDiaLog(ModelComic model, HolderComicAdmin holder) {
 
         String comicId = model.getId();
+        String comicUrl = model.getUrl();
+        String comicTitle = model.getTitle();
 
 
         //Lựa chọn hiển thị xoá hoặc sửa
@@ -103,179 +106,19 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
                         else if(which==1)
                         {
                             //Chọn xoá
-                            deleteComic(model, holder);
+                            MyApplication.deleteComic(context, ""+comicId,""+comicUrl,""+comicTitle);
+
+                            //delteComic(model, holder);
                         }
                     }
                 })
                 .show();
 
 
-    }private void loadPdfFromUrl(ModelComic model, HolderComicAdmin holder) {
-        //using url we can get file and its metadata from firebase storage
-
-        String pdfUrl = model.getUrl();
-        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
-        ref.getBytes(MAX_BYTES_PDF)
-                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-
-
-                        holder.pdfView.fromBytes(bytes)
-                                .pages(0)//show only first páge
-                                .spacing(0)
-                                .swipeHorizontal(false)
-                                .enableSwipe(false)
-                                .onError(new OnErrorListener() {
-                                    @Override
-                                    public void onError(Throwable t) {
-                                        holder.progressBar.setVisibility(View.INVISIBLE);
-                                    }
-                                })
-                                .onPageError(new OnPageErrorListener() {
-                                    @Override
-                                    public void onPageError(int page, Throwable t) {
-                                        holder.progressBar.setVisibility(View.INVISIBLE);
-                                    }
-                                })
-                                .onLoad(new OnLoadCompleteListener() {
-                                    @Override
-                                    public void loadComplete(int nbPages) {
-                                        holder.progressBar.setVisibility(View.INVISIBLE);
-                                    }
-                                })
-                                .load();
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-
-    }
-
-    private void deleteComic(ModelComic model, HolderComicAdmin holder) {
-
-        String comicId = model.getId();
-        String comicUrl = model.getUrl();
-        String comicTitle = model.getTitle();
-
-
-        progressDialog.setMessage("Đang Xoá" +comicTitle +".....");
-        progressDialog.show();
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(comicUrl);
-        storageReference.delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comics");
-                        reference.child(comicId)
-                                .removeValue()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(context,"Xoá truyện thành công...",Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(context, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(context, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void loadPdfSize(ModelComic model, HolderComicAdmin holder) {
-
-
-
-        String pdfUrl = model.getUrl();
-        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
-
-        ref.getMetadata()
-                .addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
-                    @Override
-                    public void onSuccess(StorageMetadata storageMetadata) {
-
-                        double bytes = storageMetadata.getSizeBytes();
-
-
-                        double kb = bytes/1024;
-                        double mb = kb/1024;
-
-                        if (mb > 1){
-                            holder.sizeTv.setText(String.format("%.2f",mb)+ "MB");
-
-                        }
-                        else  if (kb >= 1){
-                            holder.sizeTv.setText(String.format("%.2f",kb)+ "KB");
-
-                        }
-                        else {
-                            holder.sizeTv.setText(String.format("%.2f",bytes)+ "bytes");
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
     }
 
 
 
-    private void loadCategory(ModelComic model, HolderComicAdmin holder) {
-
-        //lấy category sử dụng categoryId
-        String categoryId = model.getCategoryId();
-        if (categoryId != null) {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categorys");
-            ref.child(categoryId)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            //lấy category
-                            String category = ""+snapshot.child("category").getValue();
-
-                            holder.categoryTv.setText(category);
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-        }
-        else {
-
-        }
-
-
-
-
-    }
 
     @NonNull
     @Override
@@ -293,10 +136,13 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
 
         //Lấy Dữ Liệu
         ModelComic model = comicArrayList.get(position);
+        String pdfId = model.getId();
+        String categoryId = model.getCategoryId();
         String title = model.getTitle();
         String description = model.getDescription();
         Long timestamp = model.getTimestamp();
 
+        String pdfUrl = model.getUrl();
         String formatedDate = MyApplication.formatTimestamp(timestamp);
 
         //set data
@@ -305,9 +151,10 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
         holder.dateTv.setText(formatedDate);
 
 
-        loadCategory(model,holder);
-        loadPdfFromUrl(model,holder);
-        loadPdfSize(model,holder);
+        MyApplication.loadCategory(""+categoryId,holder.categoryTv);
+
+        MyApplication.loadPdfFromUrlSinglePage(""+pdfUrl,""+title,holder.pdfView,holder.progressBar);
+        MyApplication.loadPdfSize(""+pdfUrl,""+title,holder.sizeTv);
 
 
         //sự kiện nhấn nút, hiển thị lựa chọn xoá hoặc chỉnh sửa
@@ -315,6 +162,16 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
             @Override
             public void onClick(View v) {
                 moreOptionsDiaLog(model, holder);
+            }
+        });
+
+        // su kien nhan nut mo chi tiet truyen
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ComicDetailActivity.class);
+                intent.putExtra("comicId",pdfId);
+                context.startActivity(intent);
             }
         });
 

@@ -4,11 +4,13 @@ public class ModelComic {
 
     String uid, id , title, description, categoryId , url;
     long timestamp;
+    long viewsCount,downloadsCount;
+
 
     public ModelComic() {
     }
 
-    public ModelComic(String uid, String id, String title, String description, String categoryId, String url, long timestamp) {
+    public ModelComic(String uid, String id, String title, String description, String categoryId, String url, long timestamp, long viewsCount, long downloadsCount) {
         this.uid = uid;
         this.id = id;
         this.title = title;
@@ -16,8 +18,9 @@ public class ModelComic {
         this.categoryId = categoryId;
         this.url = url;
         this.timestamp = timestamp;
+        this.viewsCount = viewsCount;
+        this.downloadsCount = downloadsCount;
     }
-
 
     public String getUid() {
         return uid;
@@ -73,5 +76,21 @@ public class ModelComic {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public long getViewsCount() {
+        return viewsCount;
+    }
+
+    public void setViewsCount(long viewsCount) {
+        this.viewsCount = viewsCount;
+    }
+
+    public long getDownloadsCount() {
+        return downloadsCount;
+    }
+
+    public void setDownloadsCount(long downloadsCount) {
+        this.downloadsCount = downloadsCount;
     }
 }

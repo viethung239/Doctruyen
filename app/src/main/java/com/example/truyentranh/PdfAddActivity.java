@@ -213,6 +213,8 @@ public class PdfAddActivity extends AppCompatActivity {
         hashMap.put("categoryId",""+selectedCategoryId);
         hashMap.put("url",""+uploadedPdfUrl);
         hashMap.put("timestamp",+timestamp);
+        hashMap.put("viewsCount",0);
+        hashMap.put("downloadsCount",0);
 
         //tai len bang co ten Comics
 
