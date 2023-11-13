@@ -2,11 +2,13 @@ package com.example.truyentranh;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import com.example.truyentranh.adapters.AdapterComicAdmin;
@@ -25,7 +27,7 @@ public class ComicListAdminActivity extends AppCompatActivity {
 
     private ActivityComicListAdminBinding binding;
     private ArrayList<ModelComic> comicArrayList;
-
+    private  static final String TAG ="LOI";
     private AdapterComicAdmin adapterComicAdmin;
     private String categoryId, categoryTitle ;
 
@@ -35,12 +37,21 @@ public class ComicListAdminActivity extends AppCompatActivity {
         binding = ActivityComicListAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         // lấy dữ liệu từ intent
         Intent intent = getIntent();
-        categoryId   = intent.getStringExtra("categoryId");
-        categoryTitle = intent.getStringExtra("categoryTitle");
+        if (intent.hasExtra("categoryId")) {
+            categoryId = intent.getStringExtra("categoryId");
+            Log.d(TAG, "ID danh mục đã nhận từ Intent: " + categoryId);
 
-        //set pdf category
+            categoryTitle = intent.getStringExtra("categoryTitle");
+
+        } else {
+            Log.d(TAG, "Intent không chứa categoryId");
+        }
+
+
+
         binding.subtitleTv.setText(categoryTitle);
 
         loadPdfList();
@@ -80,27 +91,49 @@ public class ComicListAdminActivity extends AppCompatActivity {
 
         comicArrayList = new ArrayList<>();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Comics");
 
-        ref.orderByChild("categoryId").equalTo(categoryId)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        comicArrayList.clear();
-                        for (DataSnapshot ds: snapshot.getChildren()){
-                            //lấy dữ liệu
-                            ModelComic model = ds.getValue(ModelComic.class);
-                            comicArrayList.add(model);
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Comics");
+            // lỗi ở đây !!!!!!!
+             Log.d(TAG, "Category ID to query: " + categoryId);
+            ref.orderByChild("categoryId").equalTo(categoryId)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            comicArrayList.clear();
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                //lấy dữ liệu
+                                ModelComic model = ds.getValue(ModelComic.class);
+
+                                Log.d(TAG, "Category ID: " + model.getCategoryId());
+                                comicArrayList.add(model);
+
+                            }
+
+                            updateAdapter();
+
                         }
 
-                        adapterComicAdmin = new AdapterComicAdmin(ComicListAdminActivity.this,comicArrayList);
-                        binding.ComicRv.setAdapter(adapterComicAdmin);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+
+
+    }
+
+    private void updateAdapter() {
+        if (adapterComicAdmin == null) {
+            // Nếu Adapter chưa được khởi tạo, thì khởi tạo nó và gán cho RecyclerView
+            adapterComicAdmin = new AdapterComicAdmin(ComicListAdminActivity.this, comicArrayList);
+
+            binding.ComicRv.setAdapter(adapterComicAdmin);
+
+        } else {
+            if (!comicArrayList.isEmpty()) {
+                adapterComicAdmin.notifyDataSetChanged();
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.example.truyentranh.model;
 
 public class ModelComic {
 
-    String uid, id , title, description,categoryId,url;
+    String uid, id , title, description, categoryId , url;
     long timestamp;
 
     public ModelComic() {
