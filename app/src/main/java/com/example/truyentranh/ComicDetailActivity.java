@@ -41,6 +41,17 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
 
+        //sự kiện nhấn nút đọc
+        binding.readComicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ComicDetailActivity.this,ComicViewActivity.class );
+
+                intent1.putExtra("comicId",comicId);
+                startActivity(intent1);
+            }
+        });
+
     }
 
     private void loadComicDetail() {
