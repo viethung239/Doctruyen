@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.truyentranh.MyApplication;
 import com.example.truyentranh.databinding.ActivityComicDetailBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +46,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         binding.readComicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ComicDetailActivity.this,ComicViewActivity.class );
+                Intent intent1 = new Intent(ComicDetailActivity.this, ComicViewActivity.class );
 
                 intent1.putExtra("comicId",comicId);
                 startActivity(intent1);

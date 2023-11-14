@@ -16,10 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.truyentranh.ComicListAdminActivity;
+import com.example.truyentranh.activities.ComicListAdminActivity;
+import com.example.truyentranh.databinding.RowCatrgoryBinding;
 import com.example.truyentranh.filters.FilterCategory;
 import com.example.truyentranh.model.ModelCategory;
-import com.example.truyentranh.databinding.RowCatrgoryBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;

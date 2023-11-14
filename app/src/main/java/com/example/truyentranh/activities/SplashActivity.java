@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.truyentranh.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -48,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser == null){
 
-            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         }
         else {
@@ -67,12 +68,12 @@ public class SplashActivity extends AppCompatActivity {
                             //check user type
                             if(userType.equals("user")){
                                 //Đây chỉ là người dùng bình thường, mở trang chủ người dùng
-                                startActivity(new Intent(SplashActivity.this,DashboardUserActivity.class));
+                                startActivity(new Intent(SplashActivity.this, DashboardUserActivity.class));
                                 finish();
                             }
                             else if(userType.equals("admin")){
                                 // Đây là tài khoản admin, mở trang chủ amdin
-                                startActivity(new Intent(SplashActivity.this,DashboardAdminActivity.class));
+                                startActivity(new Intent(SplashActivity.this, DashboardAdminActivity.class));
                                 finish();
                             }
 

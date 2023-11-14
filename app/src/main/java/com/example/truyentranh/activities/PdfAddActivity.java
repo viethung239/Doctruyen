@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

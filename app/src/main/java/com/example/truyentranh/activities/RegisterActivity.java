@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -165,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                         progressDiaLog.dismiss();
                         Toast.makeText(RegisterActivity.this,"Tài Khoản đã được tạo...", Toast.LENGTH_SHORT).show();
                         //since user account is created so start dashboard of user
-                        startActivity(new Intent(RegisterActivity.this,DashboardUserActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, DashboardUserActivity.class));
                         finish();
                     }
                 })

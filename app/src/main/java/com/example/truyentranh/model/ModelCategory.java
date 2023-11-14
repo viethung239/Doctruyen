@@ -20,6 +20,8 @@ public class ModelCategory {
         this.timestamp = timestamp;
     }
 
+
+
     /*-- Getter/Setters--*/
 
     public String getId() {

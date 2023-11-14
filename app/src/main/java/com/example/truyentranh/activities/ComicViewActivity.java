@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.truyentranh.Contrants;
 import com.example.truyentranh.databinding.ActivityComicViewBinding;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;

@@ -1,4 +1,4 @@
-package com.example.truyentranh;
+package com.example.truyentranh.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -128,12 +128,12 @@ public class LoginActivity extends AppCompatActivity {
                         //check user type
                         if(userType.equals("user")){
                             //Đây chỉ là người dùng bình thường, mở trang chủ người dùng
-                            startActivity(new Intent(LoginActivity.this,DashboardUserActivity.class));
+                            startActivity(new Intent(LoginActivity.this, DashboardUserActivity.class));
                             finish();
                         }
                         else if(userType.equals("admin")){
                             // Đây là tài khoản admin, mở trang chủ amdin
-                            startActivity(new Intent(LoginActivity.this,DashboardAdminActivity.class));
+                            startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
                             finish();
                         }
 
