@@ -135,7 +135,7 @@ public class AdapterComicAdmin extends RecyclerView.Adapter<AdapterComicAdmin.Ho
 
         MyApplication.loadCategory(""+categoryId,holder.categoryTv);
 
-        MyApplication.loadPdfFromUrlSinglePage(""+pdfUrl,""+title,holder.pdfView,holder.progressBar);
+        MyApplication.loadPdfFromUrlSinglePage(""+pdfUrl,""+title,holder.pdfView,holder.progressBar,null);
         MyApplication.loadPdfSize(""+pdfUrl,""+title,holder.sizeTv);
 
 

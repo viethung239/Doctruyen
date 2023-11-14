@@ -38,7 +38,7 @@
     </RelativeLayout>
 
     <ScrollView
-        android:layout_above="@+id/readComicBtn"
+        android:layout_above="@+id/comicOptionsLl"
         android:layout_below="@+id/toolbarapp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -56,8 +56,8 @@
                 <!--Comic preview-->
                 <RelativeLayout
                     android:id="@+id/pdfRl"
-                    android:layout_width="100dp"
-                    android:layout_height="140dp"
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
                     android:layout_marginEnd="5dp"
                     android:background="@color/gray_01">
                     <!--PDF view-->
@@ -195,6 +195,26 @@
                             android:layout_marginEnd="5dp"
                             android:text="N/A"/>
                     </TableRow>
+                    <!--Number of Comics-->
+                    <TableRow
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/pageLabelTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:layout_marginEnd="5dp"
+                            android:text="Số trang"/>
+
+                        <TextView
+                            android:id="@+id/pagesTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:layout_marginEnd="5dp"
+                            android:text="N/A"/>
+                    </TableRow>
                 </TableLayout>
 
 
@@ -213,16 +233,36 @@
         </LinearLayout>
     </ScrollView>
 
-    <!--Button-->
+    <LinearLayout
+        android:id="@+id/comicOptionsLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green">
+
+        <!--Button-->
         <Button
             android:id="@+id/readComicBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
             android:text="Đọc"
             android:drawableTop="@drawable/baseline_menu_book_24"
             android:backgroundTint="@color/green"/>
 
-    <!--Button: Open to view-->
+        <Button
+            android:id="@+id/favoriteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:text="Yêu Thích"
+            android:drawableTop="@drawable/baseline_favorite_border_24"
+            android:backgroundTint="@color/green"/>
+        <!--Button: Open to view-->
+
+    </LinearLayout>
 
 </RelativeLayout>

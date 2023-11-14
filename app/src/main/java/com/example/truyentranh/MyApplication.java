@@ -21,6 +21,7 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -143,7 +144,7 @@ public class MyApplication extends Application {
     }
 
 
-    public static void loadPdfFromUrlSinglePage(String pdfUrl, String pdfTitle, PDFView pdfView, ProgressBar progressBar) {
+    public static void loadPdfFromUrlSinglePage(String pdfUrl, String pdfTitle, PDFView pdfView, ProgressBar progressBar,TextView pagesTv) {
         //using url we can get file and its metadata from firebase storage
         String TAG = "PDF_LOAD_SINGLE_TAG";
 
@@ -177,6 +178,10 @@ public class MyApplication extends Application {
                                     @Override
                                     public void loadComplete(int nbPages) {
                                         progressBar.setVisibility(View.INVISIBLE);
+
+                                        if(pagesTv !=null){
+                                            pagesTv.setText(""+nbPages);
+                                        }
                                     }
                                 })
                                 .load();
@@ -257,5 +262,69 @@ public class MyApplication extends Application {
                 });
     }
 
+
+
+
+    public  static void addToFavorite(Context context, String comicId){
+
+         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser()==null){
+            Toast.makeText(context, "Bạn đang không đăng nhập", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            long timesamp = System.currentTimeMillis();
+
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("comicId", ""+comicId);
+            hashMap.put("timestamp", ""+timesamp);
+
+            // lưu vào db
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            ref.child(firebaseAuth.getUid()).child("Favorites").child(comicId)
+                    .setValue(hashMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Có lỗi xảy ra"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    public  static void removeFromFavorite(Context context, String comicId){
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser()==null){
+            Toast.makeText(context, "Bạn đang không đăng nhập", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+
+            // xoá khỏi db
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            ref.child(firebaseAuth.getUid()).child("Favorites").child(comicId)
+                    .removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Đã xoá khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Có lỗi xảy ra"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
 
 }

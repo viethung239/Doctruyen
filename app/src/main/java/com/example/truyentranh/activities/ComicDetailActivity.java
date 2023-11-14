@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.truyentranh.MyApplication;
+import com.example.truyentranh.R;
 import com.example.truyentranh.databinding.ActivityComicDetailBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +24,8 @@ public class ComicDetailActivity extends AppCompatActivity {
 
 
     private ActivityComicDetailBinding binding;
-
+    boolean isInMyFavorites = false;
+    private FirebaseAuth firebaseAuth;
     String comicId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,11 @@ public class ComicDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         comicId = intent.getStringExtra("comicId");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() != null){
+            checkIsFavorite();
+        }
 
         loadComicDetail();
         MyApplication.incrementComicViewCount(comicId);
@@ -50,6 +59,23 @@ public class ComicDetailActivity extends AppCompatActivity {
 
                 intent1.putExtra("comicId",comicId);
                 startActivity(intent1);
+            }
+        });
+        // sự kiện nhấn nút thêm/ xoá yêu thích
+        binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(firebaseAuth.getCurrentUser()==null){
+                    Toast.makeText(ComicDetailActivity.this, "Bạn đang không đăng nhập", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(isInMyFavorites){
+                        MyApplication.removeFromFavorite(ComicDetailActivity.this, comicId);
+                    }
+                    else {
+                        MyApplication.addToFavorite(ComicDetailActivity.this, comicId);
+                    }
+                }
             }
         });
 
@@ -73,7 +99,7 @@ public class ComicDetailActivity extends AppCompatActivity {
                         String date = MyApplication.formatTimestamp(Long.parseLong(timestamp));
 
                         MyApplication.loadCategory(""+categoryId,binding.categoryTv);
-                        MyApplication.loadPdfFromUrlSinglePage(""+url,""+title,binding.pdfView,binding.progressBar);
+                        MyApplication.loadPdfFromUrlSinglePage(""+url,""+title,binding.pdfView,binding.progressBar, binding.pagesTv);
                         MyApplication.loadPdfSize(""+url,""+title,binding.sizeTv);
 
 
@@ -83,6 +109,34 @@ public class ComicDetailActivity extends AppCompatActivity {
                         binding.viewTv.setText(viewsCount.replace("null","N/A"));
                         binding.downloadsTv.setText(downloadsCount.replace("null","N/A"));
                         binding.dateTv.setText(date);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void checkIsFavorite(){
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.child(firebaseAuth.getUid()).child("Favorites").child(comicId)
+
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isInMyFavorites = snapshot.exists();
+
+                        if (isInMyFavorites){
+                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.baseline_favorite_24,0,0);
+                            binding.favoriteBtn.setText("Xoá Yêu Thích");
+
+                        }
+                        else {
+                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.baseline_favorite_border_24,0,0);
+                            binding.favoriteBtn.setText("Yêu Thích");
+                        }
                     }
 
                     @Override

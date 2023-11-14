@@ -55,7 +55,8 @@ public class DashboardUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
-                checkUser();
+                startActivity(new Intent(DashboardUserActivity.this,MainActivity.class));
+                finish();
 
 
             }
@@ -173,8 +174,7 @@ public class DashboardUserActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser== null){
             //Chưa đăng nhập, vào màn hình chính
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            binding.subtitleTv.setText("Không tài khoản");
         }
         else {
             //đã đăng nhập, lấy thông tin người dùng
