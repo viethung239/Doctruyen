@@ -10,13 +10,19 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.truyentranh.MyApplication;
 import com.example.truyentranh.R;
+import com.example.truyentranh.adapters.AdapterPdfFavorite;
 import com.example.truyentranh.databinding.ActivityProfileBinding;
+import com.example.truyentranh.model.ModelComic;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -25,7 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     //tai len du lieu nguoi dung
     private FirebaseAuth firebaseAuth;
-
+    private ArrayList<ModelComic> comicArrayList;
+    private AdapterPdfFavorite adapterPdfFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         loadUserInfo();
+        loadFavoriteComics();
 
         //chinh sua trang ho so
         binding.profileEditBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +89,39 @@ public class ProfileActivity extends AppCompatActivity {
                                 .placeholder(R.drawable.baseline_person_2_24)
                                 .into(binding.prodileIv);
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private  void loadFavoriteComics(){
+        comicArrayList = new ArrayList<>();
+
+        //tai truyen tranh yeu thich len tu db
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid()).child("Favorites")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //xóa danh sách trước khi bắt đầu thêm dữ liệu
+                        comicArrayList.clear();
+                        for (DataSnapshot ds: snapshot.getChildren()){
+
+                            String comicId = ""+ds.child("id").getValue();
+
+                            ModelComic modelComic = new ModelComic();
+                            modelComic.setId(comicId);
+
+                            comicArrayList.add(modelComic);
+                        }
+
+                        binding.favoriteComicCountTv.setText(""+comicArrayList.size());
+                        adapterPdfFavorite = new AdapterPdfFavorite(ProfileActivity.this, comicArrayList);
+                        binding.ComicsRv.setAdapter(adapterPdfFavorite);
                     }
 
                     @Override

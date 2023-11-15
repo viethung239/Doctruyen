@@ -4,19 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import com.example.truyentranh.MyApplication;
 import com.example.truyentranh.R;
+import com.example.truyentranh.adapters.AdapterPdfFavorite;
 import com.example.truyentranh.databinding.ActivityComicDetailBinding;
+import com.example.truyentranh.model.ModelComic;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ComicDetailActivity extends AppCompatActivity {
 
@@ -26,6 +33,7 @@ public class ComicDetailActivity extends AppCompatActivity {
     private ActivityComicDetailBinding binding;
     boolean isInMyFavorites = false;
     private FirebaseAuth firebaseAuth;
+
     String comicId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,8 @@ public class ComicDetailActivity extends AppCompatActivity {
 
         loadComicDetail();
         MyApplication.incrementComicViewCount(comicId);
+
+
         // su kien nhan nut tro lai
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +90,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void loadComicDetail() {
 
