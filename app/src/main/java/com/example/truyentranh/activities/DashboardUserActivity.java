@@ -61,6 +61,14 @@ public class DashboardUserActivity extends AppCompatActivity {
 
             }
         });
+
+        // mo profile
+        binding.profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardUserActivity.this, ProfileActivity.class));
+            }
+        });
     }
 
 

@@ -92,6 +92,13 @@ public class DashboardAdminActivity extends AppCompatActivity {
             }
         });
 
+        // mo profile
+        binding.profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardAdminActivity.this, ProfileActivity.class));
+            }
+        });
     }
 
     private void loadCategories() {

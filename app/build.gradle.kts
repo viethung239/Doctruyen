@@ -53,6 +53,9 @@ dependencies {
     //github
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
 
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
 
     testImplementation("junit:junit:4.13.2");
     androidTestImplementation("androidx.test.ext:junit:1.1.5");
